@@ -2,5 +2,5 @@
 
 {
 “name”: “<Kai> <Jasinski>”,
-“email”: “<kaijasinski[at]gmail.com>”
+“email”: “<kaijasinski@gmail.com>”
 }
