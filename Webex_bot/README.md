@@ -1,5 +1,5 @@
 
-# Webex Kais Cool Bot Documentation
+# Kais Cool Webex Stock Bot Documentation
 
 ## Introduction
 
@@ -74,4 +74,4 @@ Contributions to the bot are welcome! Please feel free to fork the repository, m
 
 ## License
 
-Specify your license here or indicate if the project is open-source and freely available for modification and use.
+[LICENSE](..%2FLICENSE)
