@@ -93,29 +93,29 @@ def get_stock_info(symbol):
 def generate_stock_graph(symbol):
     api_key = 'TU0SH77LD2F9LKFS'
     data = requests.get(f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}").json()
-    # save json as file
-    print(data)
+    price_date = data['Time Series (Daily)']
     dates = sorted(data['Time Series (Daily)'].keys())
-    #prices = [data['Time Series (Daily)'][date]['4. close'] for date in dates]
-    opens = [float(data[date]['1. open']) for date in dates]
-    highs = [float(data[date]['2. high']) for date in dates]
-    lows = [float(data[date]['3. low']) for date in dates]
-    closes = [float(data[date]['4. close']) for date in dates]
+    # prices = [data['Time Series (Daily)'][date]['4. close'] for date in dates]
+    opens = [float(price_date[date]['1. open']) for date in dates]
+    highs = [float(price_date[date]['2. high']) for date in dates]
+    lows = [float(price_date[date]['3. low']) for date in dates]
+    closes = [float(price_date[date]['4. close']) for date in dates]
 
     # Plotting
     plt.figure(figsize=(14, 7))
-    plt.plot(dates, opens, label='Open', color='green')
-    plt.plot(dates, highs, label='High', color='lightgreen')
-    plt.plot(dates, lows, label='Low', color='red')
-    plt.plot(dates, closes, label='Close', color='blue')
-    plt.title('NVIDIA Corporation (NVDA) Stock Prices in February 2024')
+    plt.plot(dates, closes, label='Close Price', color='blue')
+    plt.title(f'{symbol} Stock Price')
     plt.xlabel('Date')
     plt.ylabel('Price in USD')
-    plt.xticks(rotation=45)
+    plt.xticks(dates[::3], rotation=45, ha='right', va='center')
+    fig = plt.gcf()
+    ax = fig.gca()
+    labels = ax.get_xticklabels()
+    plt.setp(labels, y=-0.06)
     plt.legend()
     plt.tight_layout()
 
-    image_save_path = 'C:/Users/kaija/Documents/Cisco/incubator-december-2023/Webex_bot/Image Cache'
+    image_save_path = '/Image_Cache'
     if not os.path.exists(image_save_path):
         os.makedirs(image_save_path)
     image_path = os.path.join(image_save_path, f"{symbol}_stock_graph.png")
